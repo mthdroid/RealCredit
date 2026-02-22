@@ -1,0 +1,260 @@
+.deck-page {
+  font-family: 'Inter', var(--font-geist-sans), system-ui, sans-serif;
+  background: #030712;
+  color: #f1f5f9;
+  line-height: 1.6;
+  padding: 0;
+}
+
+/* ---- Slide ---- */
+.slide {
+  width: 100%;
+  max-width: 960px;
+  min-height: 540px;
+  margin: 40px auto;
+  padding: 60px;
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  background: #0f1729;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.slide::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #06b6d4);
+}
+.slide-number {
+  position: absolute;
+  bottom: 20px;
+  right: 30px;
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+/* ---- Logo ---- */
+.logo-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.logo-mark .icon {
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, #3b82f6, #06b6d4);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 16px; color: white;
+}
+.logo-mark span { font-size: 24px; font-weight: 700; }
+
+/* ---- Typography ---- */
+.deck-page h1 { font-size: 42px; font-weight: 800; line-height: 1.1; margin-bottom: 16px; }
+.deck-page h2 { font-size: 32px; font-weight: 700; margin-bottom: 24px; }
+.deck-page h3 { font-size: 20px; font-weight: 600; margin-bottom: 12px; }
+.deck-page h3.blue { color: #3b82f6; }
+.deck-page h3.green { color: #22c55e; }
+.deck-page h3.purple { color: #a855f7; }
+.deck-page h3.cyan { color: #06b6d4; }
+.subtitle { font-size: 18px; color: #94a3b8; margin-bottom: 32px; }
+
+/* ---- Tags ---- */
+.tag-row { display: flex; gap: 12px; margin-top: 16px; }
+.tag {
+  display: inline-block; padding: 4px 12px; border-radius: 20px;
+  font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.tag-blue { background: rgba(59,130,246,0.2); color: #3b82f6; }
+.tag-cyan { background: rgba(6,182,212,0.2); color: #06b6d4; }
+.tag-green { background: rgba(34,197,94,0.2); color: #22c55e; }
+
+/* ---- Grid ---- */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+
+/* ---- Card ---- */
+.card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  padding: 24px;
+}
+.card-text { font-size: 14px; color: #94a3b8; }
+.flex-center { display: flex; flex-direction: column; justify-content: center; align-items: center; }
+
+/* ---- Stats ---- */
+.stat { text-align: center; }
+.stat .number, .number { font-size: 36px; font-weight: 800; }
+.stat .label, .label { font-size: 13px; color: #94a3b8; margin-top: 4px; }
+.number.red, .red { color: #ef4444; }
+.number.amber, .amber { color: #f59e0b; }
+.number.blue, .blue { color: #3b82f6; }
+.number.green, .green { color: #22c55e; }
+.number.purple, .purple { color: #a855f7; }
+.number.cyan, .cyan { color: #06b6d4; }
+.big-stat { font-size: 28px; font-weight: 800; }
+.muted { color: #94a3b8; }
+.muted-sm { font-size: 13px; color: #94a3b8; }
+.white { color: #f1f5f9; }
+
+/* ---- Bullet List ---- */
+.bullet-list { list-style: none; padding: 0; }
+.bullet-list li {
+  padding: 8px 0;
+  padding-left: 24px;
+  position: relative;
+  font-size: 16px;
+}
+.bullet-list.small li { font-size: 14px; }
+.bullet-list li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 16px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #3b82f6;
+}
+.bullet-list li.green::before { background: #22c55e; }
+.bullet-list li.purple::before { background: #a855f7; }
+.bullet-list li.amber::before { background: #f59e0b; }
+
+/* ---- Flow ---- */
+.flow { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.flow-step {
+  background: rgba(59,130,246,0.1);
+  border: 1px solid rgba(59,130,246,0.3);
+  border-radius: 10px;
+  padding: 14px 20px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  min-width: 120px;
+}
+.flow-step small { color: #94a3b8; font-weight: 400; }
+.flow-arrow { font-size: 20px; color: #94a3b8; }
+
+/* ---- Highlight ---- */
+.highlight {
+  background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(6,182,212,0.15));
+  border: 1px solid rgba(59,130,246,0.3);
+  border-radius: 12px;
+  padding: 20px 28px;
+  margin: 16px 0;
+}
+
+/* ---- Contract Table ---- */
+.contract-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.contract-table th {
+  text-align: left; padding: 8px 12px; color: #94a3b8;
+  font-weight: 600; font-size: 11px; text-transform: uppercase;
+  letter-spacing: 0.5px; border-bottom: 1px solid #1e293b;
+}
+.contract-table td { padding: 8px 12px; border-bottom: 1px solid rgba(30,41,59,0.5); }
+.contract-table .mono { font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace; font-size: 11px; color: #06b6d4; }
+
+/* ---- Timeline ---- */
+.timeline { border-left: 2px solid #1e293b; padding-left: 24px; margin-left: 12px; }
+.timeline-item { margin-bottom: 20px; position: relative; }
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -31px; top: 6px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: #3b82f6;
+  border: 2px solid #0f1729;
+}
+.timeline-item.done::before { background: #22c55e; }
+.timeline-item .time { font-size: 12px; color: #94a3b8; font-weight: 600; text-transform: uppercase; }
+
+/* ---- Score Table ---- */
+.score-table { font-size: 13px; }
+.score-row { display: flex; justify-content: space-between; padding: 6px 0; }
+.score-row.divider { border-top: 1px solid #1e293b; margin-top: 6px; padding-top: 10px; }
+
+/* ---- Link Cards ---- */
+.link-cards { display: flex; flex-direction: column; gap: 16px; }
+.link-card { text-decoration: none; color: inherit; text-align: center; cursor: pointer; display: block; }
+.link-card:hover { border-color: #3b82f6; }
+.border-blue { border-color: #3b82f6; }
+.link-icon { font-size: 32px; margin-bottom: 8px; }
+
+/* ================================================
+   PRINT STYLES — white bg, no margin, page breaks
+   ================================================ */
+@media print {
+  @page {
+    size: landscape;
+    margin: 0.5cm;
+  }
+
+  body, html, .deck-page {
+    background: white !important;
+    color: #1e293b !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hide everything outside the deck */
+  nav, footer, header, .navbar, .footer-section { display: none !important; }
+
+  .slide {
+    page-break-after: always;
+    page-break-inside: avoid;
+    break-after: page;
+    break-inside: avoid;
+    border: none;
+    border-radius: 0;
+    margin: 0;
+    padding: 40px 50px;
+    min-height: 100vh;
+    box-shadow: none;
+    background: white !important;
+  }
+  .slide:last-child {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  .slide::before {
+    background: linear-gradient(90deg, #3b82f6, #06b6d4) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .card {
+    background: #f8fafc !important;
+    border-color: #e2e8f0 !important;
+  }
+  .highlight {
+    background: #eff6ff !important;
+    border-color: #bfdbfe !important;
+  }
+  .flow-step {
+    background: #eff6ff !important;
+    border-color: #93c5fd !important;
+  }
+
+  .tag-blue { background: #dbeafe !important; color: #2563eb !important; }
+  .tag-cyan { background: #cffafe !important; color: #0891b2 !important; }
+  .tag-green { background: #dcfce7 !important; color: #16a34a !important; }
+
+  .muted, .muted-sm, .card-text, .subtitle, .slide-number,
+  .flow-step small, .flow-arrow, .timeline-item .time, .label {
+    color: #64748b !important;
+  }
+  .white, .deck-page h2, .deck-page h1, .deck-page p, .deck-page li, .deck-page strong,
+  .score-row span, .contract-table td {
+    color: #1e293b !important;
+  }
+  .contract-table .mono { color: #0891b2 !important; }
+  .logo-mark span { color: #1e293b !important; }
+
+  .link-card { border-color: #e2e8f0 !important; }
+  .border-blue { border-color: #3b82f6 !important; }
+}
