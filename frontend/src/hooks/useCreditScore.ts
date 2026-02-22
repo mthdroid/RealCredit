@@ -2,6 +2,12 @@ import { useReadContracts } from "wagmi";
 import { CreditScoreABI } from "@/config/abis";
 import { CONTRACTS } from "@/config/contracts";
 
+function safeBigInt(val: unknown): bigint {
+  if (typeof val === "bigint") return val;
+  if (val === undefined || val === null) return 0n;
+  try { return BigInt(val as string | number); } catch { return 0n; }
+}
+
 export interface CreditProfile {
   totalLoans: bigint;
   onTimeRepayments: bigint;
@@ -36,19 +42,19 @@ export function useCreditScore(address: `0x${string}` | undefined) {
     query: { enabled: !!address },
   });
 
-  const score = (data?.[0]?.result as bigint) ?? 0n;
+  const score = safeBigInt(data?.[0]?.result);
   const rating = (data?.[1]?.result as string) ?? "N/A";
   const profileRaw = data?.[2]?.result as
-    | [bigint, bigint, bigint, bigint, bigint, bigint]
+    | readonly unknown[]
     | undefined;
 
   const profile: CreditProfile = {
-    totalLoans: profileRaw?.[0] ?? 0n,
-    onTimeRepayments: profileRaw?.[1] ?? 0n,
-    defaults: profileRaw?.[2] ?? 0n,
-    totalBorrowed: profileRaw?.[3] ?? 0n,
-    totalRepaid: profileRaw?.[4] ?? 0n,
-    lastUpdated: profileRaw?.[5] ?? 0n,
+    totalLoans: safeBigInt(profileRaw?.[0]),
+    onTimeRepayments: safeBigInt(profileRaw?.[1]),
+    defaults: safeBigInt(profileRaw?.[2]),
+    totalBorrowed: safeBigInt(profileRaw?.[3]),
+    totalRepaid: safeBigInt(profileRaw?.[4]),
+    lastUpdated: safeBigInt(profileRaw?.[5]),
   };
 
   return { score, rating, profile, isLoading, refetch };

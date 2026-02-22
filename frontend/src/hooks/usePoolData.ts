@@ -3,6 +3,12 @@ import { formatEther } from "viem";
 import { LendingPoolABI, RWATokenABI } from "@/config/abis";
 import { POOLS } from "@/config/contracts";
 
+function safeBigInt(val: unknown): bigint {
+  if (typeof val === "bigint") return val;
+  if (val === undefined || val === null) return 0n;
+  try { return BigInt(val as string | number); } catch { return 0n; }
+}
+
 export interface PoolData {
   name: string;
   poolAddress: `0x${string}`;
@@ -65,13 +71,13 @@ export function useAllPoolsData() {
 
   const pools: PoolData[] = POOLS.map((pool, i) => {
     const offset = i * 7;
-    const totalDeposited = (data?.[offset]?.result as bigint) ?? 0n;
-    const totalBorrowed = (data?.[offset + 1]?.result as bigint) ?? 0n;
-    const totalShares = (data?.[offset + 2]?.result as bigint) ?? 0n;
-    const utilization = (data?.[offset + 3]?.result as bigint) ?? 0n;
-    const apy = (data?.[offset + 4]?.result as bigint) ?? 0n;
-    const totalLoans = (data?.[offset + 5]?.result as bigint) ?? 0n;
-    const totalMinted = (data?.[offset + 6]?.result as bigint) ?? 0n;
+    const totalDeposited = safeBigInt(data?.[offset]?.result);
+    const totalBorrowed = safeBigInt(data?.[offset + 1]?.result);
+    const totalShares = safeBigInt(data?.[offset + 2]?.result);
+    const utilization = safeBigInt(data?.[offset + 3]?.result);
+    const apy = safeBigInt(data?.[offset + 4]?.result);
+    const totalLoans = safeBigInt(data?.[offset + 5]?.result);
+    const totalMinted = safeBigInt(data?.[offset + 6]?.result);
 
     return {
       name: pool.name,

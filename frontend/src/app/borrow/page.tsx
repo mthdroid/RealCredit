@@ -236,7 +236,8 @@ function RepayForm() {
 
   const handleRepay = () => {
     if (!loanId || !amountOwed) return;
-    const buffer = (amountOwed as bigint) + parseEther("0.01");
+    const owedVal = typeof amountOwed === "bigint" ? amountOwed : BigInt(String(amountOwed ?? 0));
+    const buffer = owedVal + parseEther("0.01");
     repay({
       address: pool.poolAddress as `0x${string}`,
       abi: LendingPoolABI,
@@ -246,7 +247,7 @@ function RepayForm() {
     });
   };
 
-  const owedBigInt = amountOwed as bigint | undefined;
+  const owedBigInt = typeof amountOwed === "bigint" ? amountOwed : undefined;
   const hasDebt = owedBigInt !== undefined && owedBigInt > 0n;
 
   return (

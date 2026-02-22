@@ -8,6 +8,12 @@ import { RWATokenABI } from "@/config/abis";
 import { useReadContracts } from "wagmi";
 import { formatEther } from "viem";
 
+function safeBigInt(val: unknown): bigint {
+  if (typeof val === "bigint") return val;
+  if (val === undefined || val === null) return 0n;
+  try { return BigInt(val as string | number); } catch { return 0n; }
+}
+
 const ASSET_TYPE_LABELS = ["Invoice", "Treasury Bill", "Real Estate"];
 const ASSET_TYPE_COLORS = [
   "bg-blue-900/30 text-blue-400",
@@ -72,11 +78,11 @@ function useAllRWAs() {
           tokenAddress: POOLS[poolIdx].tokenAddress,
           tokenId,
           assetType: Number(meta[0]),
-          faceValue: meta[1],
-          maturityDate: meta[2],
-          issuerName: meta[3],
-          verified: meta[5],
-          active: meta[6],
+          faceValue: safeBigInt(meta[1]),
+          maturityDate: safeBigInt(meta[2]),
+          issuerName: String(meta[3] ?? ""),
+          verified: Boolean(meta[5]),
+          active: Boolean(meta[6]),
           owner: owner ?? "Unknown",
         });
       }
