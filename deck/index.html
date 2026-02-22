@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RealCredit — Project Deck</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #030712;
+      --surface: #0f1729;
+      --border: #1e293b;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --blue: #3b82f6;
+      --cyan: #06b6d4;
+      --green: #22c55e;
+      --purple: #a855f7;
+      --amber: #f59e0b;
+      --red: #ef4444;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    @media print {
+      .slide { page-break-after: always; }
+      .slide:last-child { page-break-after: avoid; }
+      body { background: white; color: #1e293b; }
+      .slide { border: none; }
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 960px;
+      min-height: 540px;
+      margin: 40px auto;
+      padding: 60px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--surface);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+    }
+
+    .slide-number {
+      position: absolute;
+      bottom: 20px;
+      right: 30px;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .logo-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .logo-mark .icon {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 16px; color: white;
+    }
+    .logo-mark span { font-size: 24px; font-weight: 700; }
+
+    h1 { font-size: 42px; font-weight: 800; line-height: 1.1; margin-bottom: 16px; }
+    h2 { font-size: 32px; font-weight: 700; margin-bottom: 24px; }
+    h3 { font-size: 20px; font-weight: 600; margin-bottom: 12px; color: var(--blue); }
+
+    .subtitle { font-size: 18px; color: var(--muted); margin-bottom: 32px; }
+    .tag {
+      display: inline-block; padding: 4px 12px; border-radius: 20px;
+      font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+
+    .card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .stat { text-align: center; }
+    .stat .number { font-size: 36px; font-weight: 800; }
+    .stat .label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+    .bullet-list { list-style: none; }
+    .bullet-list li {
+      padding: 8px 0;
+      padding-left: 24px;
+      position: relative;
+      font-size: 16px;
+    }
+    .bullet-list li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 16px;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+    .bullet-list li.green::before { background: var(--green); }
+    .bullet-list li.purple::before { background: var(--purple); }
+    .bullet-list li.amber::before { background: var(--amber); }
+
+    .flow {
+      display: flex; align-items: center; gap: 12px;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .flow-step {
+      background: rgba(59,130,246,0.1);
+      border: 1px solid rgba(59,130,246,0.3);
+      border-radius: 10px;
+      padding: 14px 20px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      min-width: 120px;
+    }
+    .flow-arrow { font-size: 20px; color: var(--muted); }
+
+    .highlight {
+      background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(6,182,212,0.15));
+      border: 1px solid rgba(59,130,246,0.3);
+      border-radius: 12px;
+      padding: 20px 28px;
+      margin: 16px 0;
+    }
+
+    .timeline { border-left: 2px solid var(--border); padding-left: 24px; margin-left: 12px; }
+    .timeline-item { margin-bottom: 20px; position: relative; }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -31px; top: 6px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--blue);
+      border: 2px solid var(--surface);
+    }
+    .timeline-item.done::before { background: var(--green); }
+    .timeline-item .time { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; }
+
+    .contract-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .contract-table th {
+      text-align: left;
+      padding: 8px 12px;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border);
+    }
+    .contract-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid rgba(30,41,59,0.5);
+    }
+    .contract-table .mono {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 11px;
+      color: var(--cyan);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SLIDE 1: Title -->
+  <div class="slide">
+    <div class="logo-mark">
+      <div class="icon">RC</div>
+      <span>RealCredit</span>
+    </div>
+    <h1>RWA Tokenization &amp; Lending<br>with On-Chain Credit Scoring</h1>
+    <p class="subtitle">Bringing real-world asset lending and verifiable credit history to Creditcoin</p>
+    <div style="display:flex; gap:12px; margin-top:16px;">
+      <span class="tag" style="background:rgba(59,130,246,0.2); color:var(--blue);">BUIDL CTC Hackathon</span>
+      <span class="tag" style="background:rgba(6,182,212,0.2); color:var(--cyan);">Creditcoin Testnet</span>
+      <span class="tag" style="background:rgba(34,197,94,0.2); color:var(--green);">Live Demo</span>
+    </div>
+    <div class="slide-number">1 / 8</div>
+  </div>
+
+  <!-- SLIDE 2: Problem -->
+  <div class="slide">
+    <h2>The Problem</h2>
+    <div class="grid-2">
+      <div>
+        <ul class="bullet-list">
+          <li><strong>Opaque credit systems</strong> &mdash; Traditional credit scores are proprietary black boxes controlled by three US agencies</li>
+          <li><strong>No on-chain verification</strong> &mdash; DeFi has no way to assess borrower reliability; everyone pays the same rate</li>
+          <li class="amber"><strong>RWAs are stranded</strong> &mdash; $100T+ in real-world assets can't be used as DeFi collateral</li>
+          <li class="purple"><strong>Undercollateralized lending is broken</strong> &mdash; Without reputation, DeFi requires 150%+ overcollateralization</li>
+        </ul>
+      </div>
+      <div class="card" style="display:flex; flex-direction:column; justify-content:center; align-items:center;">
+        <div class="stat">
+          <div class="number" style="color:var(--red);">$100T+</div>
+          <div class="label">Real-world assets locked out of DeFi</div>
+        </div>
+        <div style="height:24px;"></div>
+        <div class="stat">
+          <div class="number" style="color:var(--amber);">0</div>
+          <div class="label">On-chain credit reputation systems in production</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-number">2 / 8</div>
+  </div>
+
+  <!-- SLIDE 3: Solution -->
+  <div class="slide">
+    <h2>Our Solution</h2>
+    <p class="subtitle">A complete on-chain lending protocol with RWA collateral and reputation-based rates</p>
+    <div class="grid-3">
+      <div class="card">
+        <h3>Tokenize</h3>
+        <p style="font-size:14px; color:var(--muted);">Mint ERC-721 NFTs representing invoices, T-bills, and real estate with on-chain metadata. Verified by admins before use as collateral.</p>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--green);">Lend &amp; Borrow</h3>
+        <p style="font-size:14px; color:var(--muted);">Lenders deposit CTC into asset-specific pools. Borrowers lock verified RWA-NFTs as collateral and borrow at 70% LTV with credit-based rates.</p>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--purple);">Credit Score</h3>
+        <p style="font-size:14px; color:var(--muted);">Every repayment and default is recorded on-chain. Scores range 300-850 (FICO-like) and directly determine interest rates: 5% to 15%.</p>
+      </div>
+    </div>
+    <div style="height:28px;"></div>
+    <div class="flow">
+      <div class="flow-step">Mint RWA<br><small style="color:var(--muted);">ERC-721</small></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">Verify<br><small style="color:var(--muted);">Admin</small></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">Deposit CTC<br><small style="color:var(--muted);">Lenders</small></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">Borrow<br><small style="color:var(--muted);">70% LTV</small></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">Repay<br><small style="color:var(--muted);">+50 score</small></div>
+    </div>
+    <div class="slide-number">3 / 8</div>
+  </div>
+
+  <!-- SLIDE 4: Architecture -->
+  <div class="slide">
+    <h2>Architecture</h2>
+    <div class="grid-2">
+      <div>
+        <h3>Smart Contracts (Solidity 0.8.26)</h3>
+        <ul class="bullet-list">
+          <li><strong>RealCreditFactory</strong> &mdash; Deploys RWA collections + lending pools</li>
+          <li class="green"><strong>RWAToken (ERC-721)</strong> &mdash; On-chain metadata: asset type, face value, maturity, issuer</li>
+          <li class="purple"><strong>LendingPool</strong> &mdash; Share-based deposits, credit-scored borrowing, liquidation</li>
+          <li class="amber"><strong>CreditScore</strong> &mdash; Autonomous scoring: base 500, +50/repay, -100/default</li>
+        </ul>
+        <div style="height:16px;"></div>
+        <h3>Frontend (Next.js 14)</h3>
+        <ul class="bullet-list">
+          <li>5 pages: Dashboard, Lend, Borrow, Credit Score, RWA Explorer</li>
+          <li class="green">wagmi v2 + RainbowKit + Creditcoin custom chain</li>
+          <li class="purple">Loading skeletons, toast notifications, confirmation modals</li>
+        </ul>
+      </div>
+      <div>
+        <table class="contract-table">
+          <thead><tr><th>Contract</th><th>Address</th></tr></thead>
+          <tbody>
+            <tr><td>Factory</td><td class="mono">0x2Ae2...053e34</td></tr>
+            <tr><td>CreditScore</td><td class="mono">0x7795...cACc3F</td></tr>
+            <tr><td>Invoice Token</td><td class="mono">0x357B...24B8A</td></tr>
+            <tr><td>T-Bill Token</td><td class="mono">0xedc5...f3008</td></tr>
+            <tr><td>Real Estate Token</td><td class="mono">0x3C83...b0Fad4</td></tr>
+            <tr><td>Invoice Pool</td><td class="mono">0xF1b2...345C5</td></tr>
+            <tr><td>T-Bill Pool</td><td class="mono">0x201b...15065</td></tr>
+            <tr><td>Real Estate Pool</td><td class="mono">0xB6f7...5e64</td></tr>
+          </tbody>
+        </table>
+        <div class="highlight" style="margin-top:16px; text-align:center;">
+          <strong>45 tests</strong> &mdash; Full lifecycle coverage<br>
+          <span style="font-size:13px; color:var(--muted);">Mint &rarr; Verify &rarr; Deposit &rarr; Borrow &rarr; Repay &rarr; Score Update &rarr; Liquidate</span>
+        </div>
+      </div>
+    </div>
+    <div class="slide-number">4 / 8</div>
+  </div>
+
+  <!-- SLIDE 5: Why Creditcoin -->
+  <div class="slide">
+    <h2>Why Creditcoin?</h2>
+    <p class="subtitle">RealCredit is built for Creditcoin because Creditcoin is built for RealCredit</p>
+    <div class="grid-2">
+      <div class="card">
+        <h3>RWA-Native L1</h3>
+        <p style="font-size:14px; color:var(--muted);">Creditcoin is the only Layer 1 blockchain purpose-built for real-world credit. Our protocol extends its core mission with tokenized collateral and programmable lending pools.</p>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--green);">CEIP Alignment</h3>
+        <p style="font-size:14px; color:var(--muted);">Creditcoin Enhancement Improvement Proposals focus on credit infrastructure. RealCredit implements on-chain credit scoring as a <em>native primitive</em>, not an afterthought.</p>
+      </div>
+    </div>
+    <div style="height:24px;"></div>
+    <div class="highlight">
+      <div class="grid-3" style="text-align:center;">
+        <div>
+          <div style="font-size:28px; font-weight:800; color:var(--blue);">EVM</div>
+          <div style="font-size:13px; color:var(--muted);">Compatible &mdash; Solidity + Foundry</div>
+        </div>
+        <div>
+          <div style="font-size:28px; font-weight:800; color:var(--cyan);">102031</div>
+          <div style="font-size:13px; color:var(--muted);">Testnet Chain ID</div>
+        </div>
+        <div>
+          <div style="font-size:28px; font-weight:800; color:var(--green);">Blockscout</div>
+          <div style="font-size:13px; color:var(--muted);">Full contract verification</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-number">5 / 8</div>
+  </div>
+
+  <!-- SLIDE 6: Demo Data / Traction -->
+  <div class="slide">
+    <h2>Live on Testnet</h2>
+    <p class="subtitle">Real transactions, real state, fully verifiable on Blockscout</p>
+    <div class="grid-3" style="margin-bottom:24px;">
+      <div class="card stat">
+        <div class="number" style="color:var(--blue);">5</div>
+        <div class="label">RWA Tokens Minted</div>
+      </div>
+      <div class="card stat">
+        <div class="number" style="color:var(--green);">600</div>
+        <div class="label">tCTC Deposited</div>
+      </div>
+      <div class="card stat">
+        <div class="number" style="color:var(--purple);">3</div>
+        <div class="label">Loans Created</div>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Demo Transactions</h3>
+        <ul class="bullet-list" style="font-size:14px;">
+          <li>2 invoices ($25K, $15K) &mdash; minted &amp; verified</li>
+          <li class="green">2 T-bills ($50K, $30K) &mdash; minted &amp; verified</li>
+          <li class="amber">1 real estate ($100K) &mdash; minted &amp; verified</li>
+          <li class="purple">2 loans repaid on-time, 1 active</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--green);">Credit Score: 625</h3>
+        <p style="font-size:14px; color:var(--muted); margin-bottom:12px;">Deployer wallet after demo transactions:</p>
+        <div style="font-size:13px;">
+          <div style="display:flex; justify-content:space-between; padding:4px 0;"><span style="color:var(--muted);">Base</span><span>500</span></div>
+          <div style="display:flex; justify-content:space-between; padding:4px 0;"><span style="color:var(--muted);">Repayment Bonus (2 &times; 50)</span><span style="color:var(--green);">+100</span></div>
+          <div style="display:flex; justify-content:space-between; padding:4px 0;"><span style="color:var(--muted);">Volume Bonus (&gt;10 tCTC)</span><span style="color:var(--blue);">+25</span></div>
+          <div style="display:flex; justify-content:space-between; padding:4px 0; border-top:1px solid var(--border); margin-top:4px; padding-top:8px;"><strong>Total</strong><strong>625 (Fair)</strong></div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-number">6 / 8</div>
+  </div>
+
+  <!-- SLIDE 7: Roadmap -->
+  <div class="slide">
+    <h2>Roadmap</h2>
+    <div class="grid-2">
+      <div>
+        <div class="timeline">
+          <div class="timeline-item done">
+            <div class="time">Completed</div>
+            <p><strong>Core Protocol</strong> &mdash; 4 smart contracts, 45 tests, deployed &amp; verified</p>
+          </div>
+          <div class="timeline-item done">
+            <div class="time">Completed</div>
+            <p><strong>Frontend</strong> &mdash; 5 polished pages, responsive, deployed to Vercel</p>
+          </div>
+          <div class="timeline-item done">
+            <div class="time">Completed</div>
+            <p><strong>Testnet Demo</strong> &mdash; 5 RWAs, 3 loans, credit score history</p>
+          </div>
+          <div class="timeline-item">
+            <div class="time">Next</div>
+            <p><strong>Governance</strong> &mdash; DAO token for pool parameter voting</p>
+          </div>
+          <div class="timeline-item">
+            <div class="time">Future</div>
+            <p><strong>Multi-Oracle</strong> &mdash; Chainlink/API3 price feeds for RWA valuation</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:16px;">
+          <h3>Scaling Opportunities</h3>
+          <ul class="bullet-list" style="font-size:14px;">
+            <li>Cross-chain credit score portability (EAS attestations)</li>
+            <li class="green">Insurance fund for lender protection</li>
+            <li class="purple">Institutional RWA onboarding pipeline</li>
+            <li class="amber">Credit delegation (borrow on someone else's score)</li>
+          </ul>
+        </div>
+        <div class="highlight" style="text-align:center;">
+          <div style="font-size:14px; color:var(--muted);">Potential Market Size</div>
+          <div style="font-size:32px; font-weight:800; color:var(--blue);">$16T</div>
+          <div style="font-size:13px; color:var(--muted);">RWA tokenization market by 2030 (BCG estimate)</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-number">7 / 8</div>
+  </div>
+
+  <!-- SLIDE 8: Team + Links -->
+  <div class="slide">
+    <h2>Team &amp; Links</h2>
+    <div class="grid-2">
+      <div>
+        <div class="card" style="margin-bottom:20px;">
+          <h3>Solo Builder</h3>
+          <p style="font-size:15px;"><strong>mthdroid</strong></p>
+          <p style="font-size:14px; color:var(--muted);">Full-stack blockchain developer. Solidity, Foundry, React/Next.js. Designed, built, and deployed the entire protocol in under 2 weeks.</p>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--cyan);">Tech Stack</h3>
+          <div style="font-size:14px; color:var(--muted); line-height:2;">
+            <strong style="color:var(--text);">Contracts:</strong> Solidity 0.8.26 + Foundry + OpenZeppelin v5<br>
+            <strong style="color:var(--text);">Frontend:</strong> Next.js 14 + TypeScript + TailwindCSS<br>
+            <strong style="color:var(--text);">Web3:</strong> wagmi v2 + viem v2 + RainbowKit<br>
+            <strong style="color:var(--text);">Chain:</strong> Creditcoin Testnet (EVM, ID 102031)
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <a href="https://frontend-beryl-nine-96.vercel.app" target="_blank" style="text-decoration:none;">
+          <div class="card" style="cursor:pointer; border-color:var(--blue); text-align:center;">
+            <div style="font-size:32px; margin-bottom:8px;">&#x1f310;</div>
+            <h3>Live Demo</h3>
+            <p style="font-size:13px; color:var(--muted);">frontend-beryl-nine-96.vercel.app</p>
+          </div>
+        </a>
+        <a href="https://github.com/mthdroid/RealCredit" target="_blank" style="text-decoration:none;">
+          <div class="card" style="cursor:pointer; text-align:center;">
+            <div style="font-size:32px; margin-bottom:8px;">&#x1f4bb;</div>
+            <h3 style="color:var(--text);">Source Code</h3>
+            <p style="font-size:13px; color:var(--muted);">github.com/mthdroid/RealCredit</p>
+          </div>
+        </a>
+        <a href="https://creditcoin-testnet.blockscout.com/address/0x2Ae27E8065A88dB85e2357a64f4ED72018053e34" target="_blank" style="text-decoration:none;">
+          <div class="card" style="cursor:pointer; text-align:center;">
+            <div style="font-size:32px; margin-bottom:8px;">&#x1f50d;</div>
+            <h3 style="color:var(--text);">Verified Contracts</h3>
+            <p style="font-size:13px; color:var(--muted);">Blockscout Explorer</p>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="slide-number">8 / 8</div>
+  </div>
+
+</body>
+</html>
